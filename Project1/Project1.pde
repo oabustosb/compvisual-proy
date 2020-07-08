@@ -10,29 +10,11 @@ String letters = "#0NBKAE5wtr<!-. ";
 
 void setup() {
   size(1536, 512, P2D);  
-  img = loadImage("gato.png");
+  img = loadImage("dog.jpg");
+  //img = loadImage("gato.jpg");
   
   font = createFont("Consolas", 10);
-  /*
-  ascii = createGraphics(500, 500, P2D);
-  ascii.beginDraw();
-  ascii.textFont(font, 1.4*scale);
-  cols = img.width / scale;
-  rows = img.height / scale;
-  for(int i=0; i<cols; i++) {
-    for(int j=0; j<rows; j++) {
-      int x = i*scale;
-      int y = j*scale;
-      color c = img.pixels[x+img.width*y];
-      color br = int((red(c)+green(c)+blue(c))/3);
-      ascii.fill(0);
-      ascii.text(letters.charAt(int(br/16)), x+1, y+1);
-    }
-  }
-  
-  PImage tex = ascii.get();
-  ascii.endDraw();
-  */
+
   textureMode(NORMAL);  
   shape = createShape();
   shape.beginShape(QUAD_STRIP);
@@ -48,7 +30,6 @@ void setup() {
 }
 
 void draw() {
-  
   background(255);
   image(img, 0, 0);
   
