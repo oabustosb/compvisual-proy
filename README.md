@@ -4,13 +4,14 @@
 Oscar Alberto Bustos B. - oabustosb@unal.edu.co
 
 
+
 ## Introducción
 
 ### Problemática
 Dentro del procesamiento de imágenes, un reto importante es la manipulación de imágenes bidimensionales de gran tamaño, conocidas como _megaimágenes_ o _megatexturas_. Estas imágenes de gran formato pueden alcanzar incluso varios gigabytes de tamaño en ciertos casos, y son continuamente generadas en diversos campos científicos, como la medicina, la astronomía y la física de partículas. El almacenamiento y procesamiento de las imágenes de gran formato son problemas actuales y muy desafiantes en el campo de la Computación Visual.
 
 ### Trabajo previo
-A partir de la información consultada en diversas fuentes, se determinó que la manipulación efectiva de una _megaimagen_ requiere de dos elementos básicos: la capacidad de __navegar eficientemente__ por ella, de forma tal que se pueda identificar la posición de detalles relevantes dentro de la imagen completa, y la capacidad de __procesar rápidamente__ toda la megaimagen, incluso a nivel de pixeles individuales, para extraer propiedades relevantes de éstos o aplicar filtros cuando sean requeridos. En otras palabras, extraer información útil de una _megaimagen_ requiere __posicionar__ y __procesar__ las zonas de interés para usuarios específicos.
+A partir de la información consultada en diversas fuentes, se determinó que la manipulación efectiva de una megaimagen requiere de dos elementos básicos: la capacidad de __navegar eficientemente__ por ella, de forma tal que se pueda identificar la posición de detalles relevantes dentro de la imagen completa, y la capacidad de __procesar rápidamente__ toda la megaimagen, incluso a nivel de pixeles individuales, para extraer propiedades relevantes de éstos o aplicar filtros cuando sean requeridos. En otras palabras, _extraer información útil de una megaimagen requiere __posicionar__ y __procesar__ las zonas de interés para usuarios específicos_.
 
 
 
@@ -33,15 +34,16 @@ __¿Cómo facilitan los mipmaps la ubicación y el procesamiento?__ El mipmap de
 ## Implementación
 
 La implementación de la solución propuesta se llevó a cabo en dos fases.
-* __Aplicación de Shaders:__ Los shaders, como intermediarios entre el software de alto nivel y el hardware, aceleran el procesamiento de las imágenes gracias a la capacidad de paralelización. Además, permiten la generación automática de los mipmaps de una textura dada, a través de la función GLSL `textureLod`, que permite acceder a un mipmap específico a través de un número llamado `lod` (level-of-detail). Este sketch utiliza esta variable para cambiar dinámicamente el mipmap que se utiliza para realizar un procesamiento complejo (en este caso, la conversión de la imagen a ASCII tal como se definió en el taller de Procesamiento de Imágenes). El código se encuentra en la carpeta `Project 1`.
-* __Navegación por una imagen grande:__ Dadas las limitaciones del software de Processing (que al estar basado en Java está sometido a las características de JVM), cada sketch tiene un límite de memoria disponible, por lo que hay un límite al tamaño de las imágenes que el IDE puede manejar. Este sketch utiliza imágenes relativamente grandes (4096x4096 o 5000x5000) y permite hacer zoom y navegar por ella, utilizando atajos de teclado (las teclas `+` y `-` para aumentar y reducir el zoom, y las teclas `2`, `4`, `6` y `8` para los movimientos abajo, izquierda, derecha y arriba). El código se encuentra en la carpeta `Project 2`.
+* __Aplicación de Shaders:__ Los shaders, como intermediarios entre el software de alto nivel y el hardware, aceleran el procesamiento de las imágenes gracias a la capacidad de paralelización. Además, permiten la generación automática de los mipmaps de una textura dada, a través de la función GLSL `textureLod`, que permite acceder a un mipmap específico a través de un número llamado `lod` (_level-of-detail_). Este sketch utiliza esta variable para cambiar dinámicamente el mipmap que se utiliza para realizar un procesamiento complejo (en este caso, la conversión de la imagen a ASCII tal como se definió en el taller de Procesamiento de Imágenes). El código se encuentra en la carpeta [__Project 1__](/Project1).
+
+* __Navegación por una imagen grande:__ Dadas las limitaciones del software de Processing (que al estar basado en Java está sometido a las características de JVM), cada sketch tiene un límite de memoria disponible, por lo que hay un límite al tamaño de las imágenes que el IDE puede manejar. Este sketch utiliza imágenes relativamente grandes (4096x4096 o 5000x5000) y permite hacer zoom y navegar por ella, utilizando atajos de teclado (las teclas `+` y `-` para aumentar y reducir el zoom, y las teclas `2`, `4`, `6` y `8` para los movimientos abajo, izquierda, derecha y arriba). El código se encuentra en la carpeta [__Project 2__](/Project2).
 
 
 
 ## Conclusiones (resultados, trabajo futuro)
 
 * A pesar de las limitaciones de hardware y software presentes al realizar el proyecto, Processing es una herramienta muy poderosa para la manipulación de imágenes. La conjunción del sketch con los shaders, que permiten acelerar el procesamiento al paralelizarlo, hace que el rendimiento de los sketch del proyecto sea bastante bueno, comparándolo con escenarios en los que no se usan. Por ejemplo, al comparar el primer sketch del proyecto (conversión ASCII) con los sketch del taller que hacen lo mismo, se aprecia una evidente mejora en el rendimiento y en la rapidez del rendering.
+
 * El uso de la función de GLSL `textureLod` permite controlar la pirámide de mipmaps con gran facilidad por parte del usuario. Aunque normalmente el uso de los mipmaps es controlado de forma interna por GLSL, esta función hace que codificar los shaders para los diferentes mipmaps de las texturas sea muy sencillo. GLSL tiene múltiples opciones para generar y manipular mipmaps, pero creo que esta función lo hace de una forma muy fácil de comprender.
+
 * Existe bastante información sobre los mipmaps y cómo se usan mediante GLSL, pero hay poca información sobre cómo integrar su uso con las megaimágenes, además de que hay pocas de ellas disponibles de forma pública. Esta falta de información redujo el avance del proyecto, por lo que, como trabajo a futuro, propongo continuar investigando sobre ambos temas, encontrar más escenarios de conexión entre ellos y buscar maneras más eficientes de utilizar las diferentes herramientas de Processing para poder manejar imágenes de resoluciones aún mayores.
-
-
